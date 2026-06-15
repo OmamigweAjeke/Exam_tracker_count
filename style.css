@@ -17,6 +17,10 @@ body {
     padding: 20px;
     color: #353839;
     overflow-x: hidden;
+   /* 🚀 ADD THESE THREE LINES BELOW TO FORCE TRUE MOBILE TEXT SIZES */
+    -webkit-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    text-size-adjust: 100%;
 }
 
 /* ==========================================================================
