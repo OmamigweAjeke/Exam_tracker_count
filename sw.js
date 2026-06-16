@@ -1,11 +1,6 @@
 // ==========================================================================
 // 1. IMPORT BACKGROUND CLOUD HANDLERS
 // ==========================================================================
-try {
-    importScripts('https://cdn.onesignal.com/sdks/web/v15/OneSignalSDK.sw.js');
-} catch (error) {
-    console.log("OneSignal cloud worker loading gracefully via fallback asset parameters.");
-}
 
 // ==========================================================================
 // 2. OFFLINE STORAGE ENGINE CONFIGURATION
