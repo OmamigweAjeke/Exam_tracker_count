@@ -18,21 +18,6 @@
         });
       }
     </script>
-
-    <!-- 1. Fetch the official OneSignal Web Engine script -->
-    <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
-
-    <!-- 2. Initialize the Hybrid Listener -->
-    <script>
-      window.OneSignal = window.OneSignal || [];
-      OneSignal.push(function() {
-        OneSignal.init({
-          appId: "01c21296-4c93-4bb4-aef5-978c23036d83", // <-- Replace with your real OneSignal App ID
-          safari_web_id: "web.onesignal.auto.xxxxxx", // OneSignal sets this if needed for iOS tracking
-          notifyButton: { enable: false } // Hides their default bell widget icon
-        });
-      });
-    </script>
 </head>
 <body>
 
