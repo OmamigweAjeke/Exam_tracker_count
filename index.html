@@ -25,16 +25,20 @@
       <button id="settings-btn" onclick="toggleSettings()">⚙️ Edit Target</button>
 
       <div id="settings-panel" class="hidden">
-          <!-- Main Countdown Inputs -->
-          <label>What are you tracking?</label>
-          <input type="text" id="input-title" placeholder="e.g., Clinical Pharmacology Final">
+          <h2>Tracker Settings</h2>
+          <!-- 1. The Countdown Title Input -->
+          <label for="input-title">What are you tracking?</label>
+          <input type="text" id="input-title" placeholder="e.g., Final Exams">
           
-          <label>Target Exam Date & Time:</label>
+          <!-- 2. The Main Target Exam Date Picker -->
+          <label for="input-date">Target Exam Date & Time:</label>
           <input type="datetime-local" id="input-date">
           
-          <!-- 🚀 THE ALERT BOX: This lets students pick their custom alert day/hour -->
-          <label>Set Custom Study Reminder Alert:</label>
+          <!-- 3. THE FIXED REMINDER ALARM BOX (The piece that was missing!) -->
+          <label for="input-alarm-date">Set Custom Study Reminder Alert:</label>
           <input type="datetime-local" id="input-alarm-date">
+          
+          <!-- 4. Save Button Trigger -->
           <button id="save-btn" onclick="saveSettings()">Save Target & Arm Alarm</button>
       </div>
 
