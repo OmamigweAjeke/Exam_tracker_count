@@ -162,16 +162,16 @@ function fetchDailyMotivationalVerse() {
     const todaysReference = examReferences[referenceIndex];
 
     // UPDATED: Added '?translation=kjv' to force the King James Version text
-    fetch(`https://bible-api.com/${todaysReference}?translation=nkjv`)
+    fetch(`https://bible-api.com/${todaysReference}?translation=kjv`)
         .then(res => res.ok ? res.json() : Promise.reject())
         .then(data => {
             document.getElementById("verse-text").innerHTML = `"${data.text.trim()}"`;
-            document.getElementById("verse-ref").innerHTML = data.reference + " (NKJV)";
+            document.getElementById("verse-ref").innerHTML = data.reference + " (KJV)";
         })
         .catch(() => {
             // Backup fallback verse styled in KJV phrasing just in case of network drops
             document.getElementById("verse-text").innerHTML = '"I can do all things through Christ which strengtheneth me."';
-            document.getElementById("verse-ref").innerHTML = "Philippians 4:13 (NKJV)";
+            document.getElementById("verse-ref").innerHTML = "Philippians 4:13 (KJV)";
         });
 }
 
