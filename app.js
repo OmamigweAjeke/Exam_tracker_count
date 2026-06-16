@@ -4,7 +4,7 @@
 let examDate;
 let appTitleText;
 let countdownFunction;
-let localAlarmHeartbeat; // Tracks the offline background interval checker loop
+let localAlarmHeartbeat = null; // Tracks the offline background interval checker loop
 
 const examReferences = [
     "philippians+4:6-7", "james+1:5", "2+timothy+1:7", "colossians+3:23",
@@ -73,30 +73,48 @@ function saveSettings() {
 }
 
 // ==========================================================================
-// 3. THE LOCAL TICKING ALARM MONITOR (Runs 100% Offline)
+// 3. THE LOCAL TICKING ALARM MONITOR (Runs 100% Offline & Isolated)
 // ==========================================================================
 function activateOfflineAlarmMonitor(targetAlarmTime) {
-    // Check the device hardware system clock every 10 seconds
+    console.log("Alarm monitor engine armed for timestamp:", targetAlarmTime);
+    
+    // Safety check: Kill any existing tracking loop cycle before initializing a new one
+    if (localAlarmHeartbeat) clearInterval(localAlarmHeartbeat);
+
+    // Check the hardware system clock every 5 seconds for absolute precision
     localAlarmHeartbeat = setInterval(() => {
         const now = new Date().getTime();
 
-        // When the clock crosses the user's customized alert time
+        // When the clock crosses or meets the user's customized alert time
         if (now >= targetAlarmTime) {
-            clearInterval(localAlarmHeartbeat); // Kill monitoring cycle loop
+            clearInterval(localAlarmHeartbeat); // Kill monitoring cycle loop instantly
             localStorage.removeItem("customAlarmTime"); // Clear memory slot so it doesn't double-fire
-
-            // Fire Web Notification Prompt if browser has permissions approved
-            if (Notification.permission === "granted") {
-                new Notification("Exam Success Tracker! 🔔", {
-                    body: "This is your custom scheduled alert. Time to check your target tracks!",
-                    icon: "https://cdn-icons-png.flaticon.com/512/3652/3652191.png"
-                });
-            } else {
-                // Device hardware backup alert box if notification blocks are turned off
-                alert("⏰ Tracker Alert: Check your custom target timetables!");
-            }
+            
+            triggerAlarmNotification();
         }
-    }, 10000);
+    }, 5000);
+}
+
+function triggerAlarmNotification() {
+    const alertMessage = "⏰ Study Reminder: Time to check your target tracks and memorize your pathways!";
+    
+    // 1. Try to send a native OS background banner notification tray item
+    if (typeof Notification !== "undefined" && Notification.permission === "granted") {
+        try {
+            new Notification("Exam Success Tracker! 🔔", {
+                body: alertMessage,
+                icon: "https://cdn-icons-png.flaticon.com/512/3652/3652191.png"
+            });
+        } catch (error) {
+            console.log("Native background notification engine delivery paused by system parameters.");
+        }
+    }
+
+    // 2. The Native UI Pop-up Fallback
+    // Isolated inside a short timeout to prevent mobile engines from tagging the pop-up as loop spam
+    setTimeout(() => {
+        alert(alertMessage);
+    }, 100);
 }
 
 // ==========================================================================
