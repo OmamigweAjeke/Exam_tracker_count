@@ -19,20 +19,22 @@
       }
     </script>
     
+    <!-- OneSignal Cloud Notification Engine -->
     <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
     <script>
-        window.OneSignalDeferred = window.OneSignalDeferred || [];
-        OneSignalDeferred.push(async function(OneSignal) {
-            await OneSignal.init({
+        window.OneSignal = window.OneSignal || [];
+        OneSignal.push(function() {
+            OneSignal.init({
                 appId: "cb6598dc-1fd6-4d0a-8356-0cf2adb50f90",
                 safari_web_id: "web.onesignal.auto.20cc36d3-e742-47b9-8fc8-37c27a32926f",
                 notifyButton: {
-                    enable: true,
+                    enable: false, /* Keeps the messy red bell icon hidden for a clean look */
                 },
             });
         });
     </script>
 </head>
+    
 <body>
 
   <div class="app-container">
