@@ -35,14 +35,21 @@
     </script>
     -->
 
+    <!-- Official OneSignal Web Push SDK with Safety Wrapper -->
     <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
     <script>
         window.OneSignal = window.OneSignal || [];
+        
+        // By using .push(), we force the browser to wait until the SDK is completely loaded
         OneSignal.push(function() {
-            OneSignal.init({
-                appId: "6d08e02b-7bda-40a5-9a1e-c4db22050d56",
-                safari_web_id: "web.onesignal.auto.0908e376-c893-48cd-92f7-007572df5c49",
-            });
+            if (typeof OneSignal.init === "function") {
+                OneSignal.init({
+                    appId: "YOUR_FRESH_ONESIGNAL_APP_ID_HERE",
+                });
+                console.log("OneSignal factory initialization complete!");
+            } else {
+                console.log("OneSignal SDK file is still compiling, waiting...");
+            }
         });
     </script>
 </head>
