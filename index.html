@@ -19,31 +19,20 @@
       }
     </script>
     
-    <!-- OneSignal Cloud Notification Engine -->
-   <script src="https://cdn.onesignal.com/sdks/web/v15/OneSignalSDK.page.js" defer></script>
+    <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
     <script>
-        // Safety Loop: Checks if OneSignal is ready before executing initialization properties
-        window.OneSignal = window.OneSignal || [];
-        
-        function initOneSignalEngine() {
-            if (window.OneSignal && typeof window.OneSignal.init === "function") {
-                window.OneSignal.init({
-                    appId: "cb6598dc-1fd6-4d0a-8356-0cf2adb50f90",
-                    notifyButton: {
-                        enable: false, /* Keeps the floating red bell hidden */
-                    },
-                    autoResubscribe: true /* Keeps your classmate tokens refreshed */
-                });
-                console.log("OneSignal Engine successfully armed and listening for cloud signals!");
-            } else {
-                // If the cloud file hasn't arrived yet, wait 200ms and check again
-                setTimeout(initOneSignalEngine, 200);
-            }
-        }
-        
-        // Fire the check loop
-        initOneSignalEngine();
+        window.OneSignalDeferred = window.OneSignalDeferred || [];
+        OneSignalDeferred.push(async function(OneSignal) {
+            await OneSignal.init({
+                appId: "6d08e02b-7bda-40a5-9a1e-c4db22050d56",
+                safari_web_id: "web.onesignal.auto.0908e376-c893-48cd-92f7-007572df5c49",
+                notifyButton: {
+                    enable: true,
+                },
+            });
+        });
     </script>
+    
 </head>
     
 <body>
